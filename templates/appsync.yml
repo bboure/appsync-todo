@@ -16,3 +16,6 @@ dataSources:
         Ref: TodoTable
 
 mappingTemplates:
+  - dataSource: todos
+    type: Mutation
+    field: createTodo

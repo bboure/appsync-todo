@@ -3,15 +3,23 @@ type Query {
   todo(id: ID!): Todo
 }
 
+type Mutation {
+  createTodo(todo: CreateTodo): Todo!
+}
+
 type Todo {
   id: ID!
   title: String!
   createdAt: AWSDateTime
-  items: [TodoItem!]!
+  items: [TodoItem!]
 }
 
 type TodoItem {
   id: ID!
-  title: String!
+  task: String!
   done: Boolean!
+}
+
+input CreateTodo {
+  title: String!
 }

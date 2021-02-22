@@ -1,0 +1,17 @@
+#set($id=$util.autoId())
+#set($now=$util.time.nowFormatted("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+#set($attributeValues={})
+#foreach($item in $ctx.args.todo.entrySet())
+  $util.qr($attributeValues.put("${item.key}", $util.dynamodb.toDynamoDB($item.value)))
+#end
+$util.qr($attributeValues.put("id", $util.dynamodb.toDynamoDB($id)))
+$util.qr($attributeValues.put("createdAt", $util.dynamodb.toDynamoDB($now)))
+{
+  "version": "2018-05-29",
+  "operation": "PutItem",
+  "key": {
+    "PK": $util.dynamodb.toDynamoDBJson("TODO#${id}"),
+    "SK": $util.dynamodb.toDynamoDBJson("TODO#${id}")
+  },
+  "attributeValues": $util.toJson($attributeValues)
+}
