@@ -1,7 +1,7 @@
 #set($expression = "SET ")
 #set($expressionValues={})
 #set($expressionNames={})
-#foreach($item in $util.map.copyAndRemoveAllKeys($ctx.args.todo, ["id"]).entrySet())
+#foreach($item in $util.map.copyAndRemoveAllKeys($ctx.args.task, ["id"]).entrySet())
   $util.qr($expressionNames.put("#${item.key}", $item.key))
   $util.qr($expressionValues.put(":${item.key}", $util.dynamodb.toDynamoDB($item.value)))
   #set($expression = $expression + "#${item.key} = :${item.key}")
@@ -13,8 +13,8 @@
   "version": "2018-05-29",
   "operation": "UpdateItem",
   "key": {
-    "PK": $util.dynamodb.toDynamoDBJson("TODO#${ctx.args.todo.id}"),
-    "SK": $util.dynamodb.toDynamoDBJson("TODO#${ctx.args.todo.id}")
+    "PK": $util.dynamodb.toDynamoDBJson("TODO#${ctx.args.todoId}"),
+    "SK": $util.dynamodb.toDynamoDBJson("TODOTASK#${ctx.args.task.id}")
   },
   "update": {
     "expression": "$expression",

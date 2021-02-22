@@ -29,6 +29,9 @@ mappingTemplates:
     type: Mutation
     field: updateTodo
   - dataSource: todos
+    type: Mutation
+    field: updateTask
+  - dataSource: todos
     type: Query
     field: todos
   - dataSource: todos

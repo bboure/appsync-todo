@@ -7,6 +7,7 @@ type Mutation {
   createTodo(todo: CreateTodo): Todo!
   updateTodo(todo: UpdateTodo): Todo!
   addTask(todoId: ID, task: AddTask!): Boolean
+  updateTask(todoId: ID, task: UpdateTask!): TodoTask!
 }
 
 type Todos {
@@ -38,5 +39,11 @@ input UpdateTodo {
 
 input AddTask {
   task: String!
+  done: Boolean
+}
+
+input UpdateTask {
+  id: ID!
+  task: String
   done: Boolean
 }
