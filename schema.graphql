@@ -8,6 +8,7 @@ type Mutation {
   updateTodo(todo: UpdateTodo): Todo!
   addTask(todoId: ID, task: AddTask!): Boolean
   updateTask(todoId: ID, task: UpdateTask!): TodoTask!
+  deleteTask(todoId: ID!, taskId: ID!): Boolean
 }
 
 type Todos {

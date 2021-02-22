@@ -1,0 +1,14 @@
+{
+  "version": "2018-05-29",
+  "operation": "DeleteItem",
+  "key": {
+    "PK": $util.dynamodb.toDynamoDBJson("TODO#${context.args.todoId}"),
+    "SK": $util.dynamodb.toDynamoDBJson("TODOTASK#${context.args.taskId}")
+  },
+  "condition": {
+    "expression": "attribute_exists(#PK)",
+    "expressionNames": {
+      "#PK": "PK"
+    }
+  }
+}
