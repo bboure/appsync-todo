@@ -1,0 +1,17 @@
+{
+  "name": "appsync-todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serverless-appsync-plugin": "^1.7.0",
+    "serverless-appsync-simulator": "^0.11.0",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-offline": "^6.8.0"
+  }
+}

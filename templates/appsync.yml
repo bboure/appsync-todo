@@ -1,0 +1,18 @@
+name: ${self:provider.stage}-todo
+authenticationType: API_KEY
+
+apiKeys:
+  - name: App
+    expiresAfter: 365d
+
+logConfig:
+  level: ALL
+
+dataSources:
+  - type: AMAZON_DYNAMODB
+    name: todos
+    config:
+      tableName:
+        Ref: TodoTable
+
+mappingTemplates:
