@@ -6,6 +6,7 @@ type Query {
 type Mutation {
   createTodo(todo: CreateTodo): Todo!
   updateTodo(todo: UpdateTodo): Todo!
+  deleteTodo(id: ID!): Boolean
   addTask(todoId: ID, task: AddTask!): Boolean
   updateTask(todoId: ID, task: UpdateTask!): TodoTask!
   deleteTask(todoId: ID!, taskId: ID!): Boolean

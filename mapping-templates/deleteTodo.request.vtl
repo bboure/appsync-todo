@@ -1,0 +1,16 @@
+#set($delete=[])
+#foreach($item in $ctx.prev.result)
+#set($delItem={})
+$util.qr($delItem.put("operation", "DeleteItem"))
+$util.qr($delItem.put("table", "${todosTable}"))
+#set($key={})
+$util.qr($key.put("PK", $util.dynamodb.toDynamoDBJson("TODO#${item.PK}")))
+$util.qr($key.put("SK", $util.dynamodb.toDynamoDBJson("TODO#${item.SK}")))
+$util.qr($delItem.put("key", $key))
+$util.qr($delete.push($delItem))
+#end
+{
+  "version": "2018-05-29",
+  "operation": "TransactWriteItems",
+  "transactItems": $util.toJson($delete)
+}

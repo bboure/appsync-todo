@@ -18,6 +18,13 @@ dataSources:
       tableName:
         Ref: TodoTable
 
+
+functionConfigurations:
+  - name: findTodo
+    dataSource: todos
+  - name: deleteTodo
+    dataSource: todos
+
 mappingTemplates:
   - dataSource: todos
     type: Mutation
@@ -34,6 +41,13 @@ mappingTemplates:
   - dataSource: todos
     type: Mutation
     field: deleteTask
+  - dataSource: todos
+    kind: PIPELINE
+    type: Mutation
+    field: deleteTodo
+    functions:
+      - findTodo
+      - deleteTodo
   - dataSource: todos
     type: Query
     field: todos

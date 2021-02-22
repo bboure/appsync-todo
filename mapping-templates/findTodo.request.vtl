@@ -1,0 +1,13 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "Query",
+    "query" : {
+      "expression": "#PK = :PK",
+      "expressionNames" : {
+        "#PK" : "PK"
+      },
+      "expressionValues" : {
+        ":PK": $util.dynamodb.toDynamoDBJson("TODO#$context.args.id")
+      }
+    }
+}
