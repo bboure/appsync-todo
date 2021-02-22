@@ -17,10 +17,10 @@ type Todo {
   id: ID!
   title: String!
   createdAt: AWSDateTime
-  items: [TodoItem!]
+  tasks: [TodoTask!]
 }
 
-type TodoItem {
+type TodoTask {
   id: ID!
   task: String!
   done: Boolean!

@@ -1,0 +1,16 @@
+#if($context.result.items.size() == 0)
+  $utils.error("NotFound", "NotFound");
+#else
+  #set ($todo = {})
+  #foreach($item in $context.result.items)
+    #if($item.SK.contains("TODO#"))
+      #set ($todo = $item)
+      $util.qr($todo.put("tasks", []))
+    #else
+      #if($item.SK.contains("TODOTASK#"))
+        $util.qr($todo.tasks.add($item))
+      #end
+    #end
+  #end
+  $utils.toJson($todo)
+#end

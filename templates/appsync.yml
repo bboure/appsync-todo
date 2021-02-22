@@ -28,3 +28,6 @@ mappingTemplates:
   - dataSource: todos
     type: Query
     field: todos
+  - dataSource: todos
+    type: Query
+    field: todo
