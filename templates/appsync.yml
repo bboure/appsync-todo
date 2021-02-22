@@ -31,3 +31,6 @@ mappingTemplates:
   - dataSource: todos
     type: Query
     field: todo
+  - dataSource: todos
+    type: Todo
+    field: tasks
