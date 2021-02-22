@@ -1,10 +1,15 @@
 type Query {
-  todos: [Todo!]!
+  todos(limit: Int, nextToken: String): Todos!
   todo(id: ID!): Todo
 }
 
 type Mutation {
   createTodo(todo: CreateTodo): Todo!
+}
+
+type Todos {
+  items: [Todo!]!
+  nextToken: String
 }
 
 type Todo {

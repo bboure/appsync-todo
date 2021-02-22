@@ -19,3 +19,6 @@ mappingTemplates:
   - dataSource: todos
     type: Mutation
     field: createTodo
+  - dataSource: todos
+    type: Query
+    field: todos
