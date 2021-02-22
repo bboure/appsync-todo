@@ -4,5 +4,5 @@
     #if(!$utils.isNull($ctx.args.nextToken))
     "nextToken" : "$ctx.args.nextToken",
     #end
-    "limit" : $utils.defaultIfNullOrEmpty($ctx.args.limit, 10)
+    "limit" : $utils.defaultIfNullOrEmpty("$ctx.args.limit", "10")
 }

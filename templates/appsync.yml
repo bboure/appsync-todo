@@ -1,6 +1,9 @@
 name: ${self:provider.stage}-todo
 authenticationType: API_KEY
 
+substitutions:
+  todosTable: !Ref TodoTable
+
 apiKeys:
   - name: App
     expiresAfter: 365d
@@ -19,6 +22,9 @@ mappingTemplates:
   - dataSource: todos
     type: Mutation
     field: createTodo
+  - dataSource: todos
+    type: Mutation
+    field: addTask
   - dataSource: todos
     type: Query
     field: todos

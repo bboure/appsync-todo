@@ -1,0 +1,40 @@
+#set($id=$util.autoId())
+#set($attributeValues={})
+#foreach($item in $ctx.args.task.entrySet())
+  $util.qr($attributeValues.put("${item.key}", $util.dynamodb.toDynamoDB($item.value)))
+#end
+$util.qr($attributeValues.put("id", $util.dynamodb.toDynamoDB($id)))
+#if(!$util.isNull($ctx.args.task.done))
+  $util.qr($attributeValues.put("done", $util.dynamodb.toDynamoDB($ctx.args.task.done)))
+#else
+  $util.qr($attributeValues.put("done", $util.dynamodb.toDynamoDB(false)))
+#end
+{
+  "version": "2018-05-29",
+  "operation": "TransactWriteItems",
+  "transactItems": [
+    {
+      "table": "${todosTable}",
+      "operation": "PutItem",
+      "key": {
+        "PK": $util.dynamodb.toDynamoDBJson("TODO#${ctx.args.todoId}"),
+        "SK": $util.dynamodb.toDynamoDBJson("TODOTASK#${id}")
+      },
+      "attributeValues": $util.toJson($attributeValues)
+    },
+    {
+      "table": "${todosTable}",
+      "operation": "ConditionCheck",
+      "key": {
+        "PK": $util.dynamodb.toDynamoDBJson("TODO#${ctx.args.todoId}"),
+        "SK": $util.dynamodb.toDynamoDBJson("TODO#${ctx.args.todoId}")
+      },
+      "condition": {
+        "expression": "attribute_exists(#PK)",
+        "expressionNames": {
+          "#PK": "PK"
+        }
+      }
+    }
+  ]
+}
