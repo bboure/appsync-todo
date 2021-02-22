@@ -1,1 +1,5 @@
-$utils.toJson($ctx.result.items)
+#if($context.result.items.size() == 0)
+  $utils.error("NotFound", "NotFound");
+#else
+  $utils.toJson($context.result.items)
+#end

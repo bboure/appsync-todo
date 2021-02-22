@@ -4,10 +4,10 @@
 $util.qr($delItem.put("operation", "DeleteItem"))
 $util.qr($delItem.put("table", "${todosTable}"))
 #set($key={})
-$util.qr($key.put("PK", $util.dynamodb.toDynamoDBJson("TODO#${item.PK}")))
-$util.qr($key.put("SK", $util.dynamodb.toDynamoDBJson("TODO#${item.SK}")))
+$util.qr($key.put("PK", $util.dynamodb.toDynamoDB($item.PK)))
+$util.qr($key.put("SK", $util.dynamodb.toDynamoDB($item.SK)))
 $util.qr($delItem.put("key", $key))
-$util.qr($delete.push($delItem))
+$util.qr($delete.add($delItem))
 #end
 {
   "version": "2018-05-29",
