@@ -1,5 +1,6 @@
-service:
-  name: todo
+org: benoitbo
+app: todos
+service: api
 
 plugins:
   - serverless-appsync-plugin
