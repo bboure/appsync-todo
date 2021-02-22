@@ -6,6 +6,8 @@
 #end
 $util.qr($attributeValues.put("id", $util.dynamodb.toDynamoDB($id)))
 $util.qr($attributeValues.put("createdAt", $util.dynamodb.toDynamoDB($now)))
+$util.qr($attributeValues.put("GSI1PK", $util.dynamodb.toDynamoDB("Todo")))
+$util.qr($attributeValues.put("GSI1SK", $util.dynamodb.toDynamoDB($now)))
 {
   "version": "2018-05-29",
   "operation": "PutItem",
