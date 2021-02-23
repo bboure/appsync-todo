@@ -1,9 +1,7 @@
-#set($id=$util.autoId())
 #set($attributeValues={})
 #foreach($item in $ctx.args.task.entrySet())
   $util.qr($attributeValues.put("${item.key}", $util.dynamodb.toDynamoDB($item.value)))
 #end
-$util.qr($attributeValues.put("id", $util.dynamodb.toDynamoDB($id)))
 #if(!$util.isNull($ctx.args.task.done))
   $util.qr($attributeValues.put("done", $util.dynamodb.toDynamoDB($ctx.args.task.done)))
 #else
@@ -18,9 +16,16 @@ $util.qr($attributeValues.put("id", $util.dynamodb.toDynamoDB($id)))
       "operation": "PutItem",
       "key": {
         "PK": $util.dynamodb.toDynamoDBJson("TODO#${ctx.args.todoId}"),
-        "SK": $util.dynamodb.toDynamoDBJson("TODOTASK#${id}")
+        "SK": $util.dynamodb.toDynamoDBJson("TODOTASK#${ctx.args.task.id}")
       },
-      "attributeValues": $util.toJson($attributeValues)
+      "attributeValues": $util.toJson($attributeValues),
+      ## avoid duplicates
+      "condition": {
+        "expression": "attribute_not_exists(#PK)",
+        "expressionNames": {
+          "#PK": "PK"
+        }
+      }
     },
     {
       "table": "${todosTable}",

@@ -40,6 +40,7 @@ input UpdateTodo {
 }
 
 input AddTask {
+  id: ID!
   task: String!
   done: Boolean
 }

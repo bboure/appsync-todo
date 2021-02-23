@@ -1,7 +1,7 @@
 #set($expression = "SET ")
 #set($expressionValues={})
 #set($expressionNames={})
-#foreach($item in $util.map.copyAndRemoveAllKeys($ctx.args.task, ["id"]).entrySet())
+#foreach($item in $ctx.args.task.entrySet())
   $util.qr($expressionNames.put("#${item.key}", $item.key))
   $util.qr($expressionValues.put(":${item.key}", $util.dynamodb.toDynamoDB($item.value)))
   #set($expression = $expression + "#${item.key} = :${item.key}")
